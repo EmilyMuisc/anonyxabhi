@@ -52,9 +52,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 💡 This Prediction Bot will only work when you have Register with bellow links.
 
-BIGDADDY GAMES: [REGISTER NOW](https://www.bdggame.in/#/register?invitationCode=654343706843)
+BIGDADDY GAMES: 
+https://www.bdggame.in/#/register?invitationCode=654343706843
                     OR
-                [REGISTER NOW](https://bdc5.com/#/register?invitationCode=616515213799)
+https://bdc5.com/#/register?invitationCode=616515213799
 
 📑 If you follow with above links, there will be upto 99% chance of right prediction.''',reply_markup=prediction_markup)
             # await update.message.reply_text('play the games',reply_markup=prediction_markup)
