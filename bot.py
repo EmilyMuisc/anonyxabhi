@@ -3,11 +3,11 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, filte
 from random import choice
 import logging
 
-CHANNEL_USERNAME = '@TIRANGA_18'  # Replace with your channel's username
-CHANNEL_LINK = 'https://t.me/TIRANGA_18'  # Replace with your channel's invite link
+CHANNEL_USERNAME = '@SUNILBIGGDADY'  # Replace with your channel's username
+CHANNEL_LINK = 'https://t.me/+HVz1FO4q6K9mYWE1'  # Replace with your channel's invite link
 
 can_show = False
-admins = ['ITS_JASS_TOP']
+admins = ['GROW_MORE015']
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -28,7 +28,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     with open(image_path, 'rb') as image_file:
         if chat_member.status in ['left', 'kicked']:
             keyboard = [InlineKeyboardButton("Join Channel", url=CHANNEL_LINK)]
-            joined_status_no = [InlineKeyboardButton("Channel joined 🔴", callback_data="inactive")]
+            joined_status_no = [InlineKeyboardButton(" VERIFY 🔎", callback_data="inactive")]
             # [[inactive_button1], [inactive_button2]]
             reply_markup = InlineKeyboardMarkup([keyboard ,joined_status_no])
             # await update.message.reply_text('Please join the channel to use this bot.', reply_markup=reply_markup)
@@ -48,13 +48,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             
             await context.bot.send_message(chat_id=chat_id, text='''👋 Hey! Welcome to our Bot.
 
-❤️‍🔥 Get 99.99% accurate colour prediction!
+❤️‍🔥 Get 90% accurate colour prediction! And Maintain 6-7 lvl Fund. 
 
 💡 This Prediction Bot will only work when you have Register with bellow links.
 
-TirangaGames:
-https://tirangacasino.in/#/register?invitationCode=3252569730
-
+BIGDADDY GAMES: [REGISTER NOW](https://www.bdggame.in/#/register?invitationCode=654343706843)
+                    OR
+                [REGISTER NOW](https://bdc5.com/#/register?invitationCode=616515213799)
 
 📑 If you follow with above links, there will be upto 99% chance of right prediction.''',reply_markup=prediction_markup)
             # await update.message.reply_text('play the games',reply_markup=prediction_markup)
@@ -80,7 +80,7 @@ async def choose(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     chat_member = await context.bot.get_chat_member(CHANNEL_USERNAME, user_id)
     if not (chat_member.status in ['left', 'kicked']):
         print("yea");
-        tiranga = [KeyboardButton(text="⚀ Tiranga Games")]
+        tiranga = [KeyboardButton(text="⚀ BIGDADDY GAMES")]
         
         choose_markup = ReplyKeyboardMarkup([tiranga],resize_keyboard=True,one_time_keyboard=True)
         await context.bot.send_message(chat_id=chat_id, text="choose",reply_markup=choose_markup)
@@ -121,7 +121,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     elif text == "fuck you":
         await update.message.reply_text("no, fuck you")
     
-    elif text == "⚀ Tiranga Games" or text == "⚡ Next Prediction ⚡":
+    elif text == "⚀ BIGDADDY GAMES" or text == "⚡ Next Prediction ⚡":
 
         await update.message.reply_text("🎮 Enter Period last 3 digits.",reply_markup=ReplyKeyboardRemove())
         text = update.message.text
@@ -136,7 +136,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         next_markup = ReplyKeyboardMarkup([next_prediction,back_press],resize_keyboard=True,one_time_keyboard=True)
 
 
-        pred = f"✅Prediction Result:\n👨‍💻Period No: {text}\n⚡Result: {result} \n\n Powered by 😈 : ◤𝙏𝙄𝙍𝘼𝙉𝙂𝘼◢~JASS "
+        pred = f"✅Prediction Result:\n👨‍💻Period No: {text}\n⚡Result: {result} \n\n Powered by 😈 : SUNIL YOGI "
 
         can_show = False
 
@@ -155,7 +155,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     
     print(can_show)
     
-application = ApplicationBuilder().token("7081960525:AAH23LZ7B429ZTVTQqHluB9HQAuwdrB4u58").build()
+application = ApplicationBuilder().token("7043323556:AAE-cRQzrUOmzSnKh5hgEsKkmtumiyNodo4").build()
 
 application.add_handler(CommandHandler("start", start))
 application.add_handler(CommandHandler("broadcast", broadcast))
