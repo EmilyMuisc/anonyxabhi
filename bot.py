@@ -81,7 +81,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         # chat_id = update.message.chat_id
         await start(update, context)
     
-    if query.data == "𝙔𝙚𝙨":
+    if query.data == "𝙔𝙚𝙨❤️":
         prediction_button = [[KeyboardButton(text="🎰Colour Prediction")]]
         prediction_markup = ReplyKeyboardMarkup(prediction_button,resize_keyboard=True,one_time_keyboard=True)
         
