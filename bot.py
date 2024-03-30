@@ -13,6 +13,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 user_chat_ids = set()
 
+image_path = 'static/banner.jpeg'
+
 def Random_choice():
     option = ['𝐁𝐈𝐆📈','𝐒𝐌𝐀𝐋𝐋📉']
     return choice(option)
@@ -23,11 +25,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = update.effective_user.id
     chat_member = await context.bot.get_chat_member(CHANNEL_USERNAME, user_id)
     
-    image_path = 'static/banner.jpeg'
 
     with open(image_path, 'rb') as image_file:
         if chat_member.status in ['left', 'kicked']:
-            keyboard = [InlineKeyboardButton("Join Channel", url=CHANNEL_LINK)]
+            keyboard = [InlineKeyboardButton("𝐉𝐎𝐈𝐍 𝐂𝐇𝐀𝐍𝐍𝐄𝐋", url=CHANNEL_LINK)]
             joined_status_no = [InlineKeyboardButton(" VERIFY 🔎", callback_data="inactive")]
             # [[inactive_button1], [inactive_button2]]
             reply_markup = InlineKeyboardMarkup([keyboard ,joined_status_no])
@@ -37,36 +38,41 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
             user_chat_ids.add(chat_id)
 
-            joined_status_yes = [[InlineKeyboardButton("Channel joined 🟢", callback_data="inactive")]]
+            # joined_status_yes = [[InlineKeyboardButton("Channel joined 🟢", callback_data="inactive")]]
 
-            reply_markup2 = InlineKeyboardMarkup(joined_status_yes)
+            # reply_markup2 = InlineKeyboardMarkup(joined_status_yes)
 
-            prediction_button = [[KeyboardButton(text="🎰Colour Prediction")]]
-            prediction_markup = ReplyKeyboardMarkup(prediction_button,resize_keyboard=True,one_time_keyboard=True)
+            registered_yes = [InlineKeyboardButton("𝙔𝙚𝙨❤️",callback_data="𝙔𝙚𝙨❤️")]
+            registered_no = [InlineKeyboardButton("𝙉𝙊🙄",callback_data="inactive")]
+
+            registered_markup = InlineKeyboardMarkup([registered_yes,registered_no])
+
             # await update.message.reply_text('Hello! You are a member of the channel. You can use the bot commands.')
-            await context.bot.send_photo(chat_id=chat_id, photo=image_file, caption='𝐇𝐞𝐥𝐥𝐨! 𝐘𝐨𝐮 𝐚𝐫𝐞 𝐚 𝐦𝐞𝐦𝐛𝐞𝐫 𝐨𝐟 𝐭𝐡𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥. 𝐘𝐨𝐮 𝐜𝐚𝐧 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐛𝐨𝐭 𝐜𝐨𝐦𝐦𝐚𝐧𝐝𝐬.',reply_markup=reply_markup2)
+    
             
-            await context.bot.send_message(chat_id=chat_id, text='''👋 Hey! Welcome to our Bot.
+            await context.bot.send_photo(chat_id=chat_id, photo=image_file, caption='''👋 Hey! Welcome to our Bot.
 
-❤️‍🔥 Get 90% accurate colour prediction! And Maintain 6-7 lvl Fund. 
+❤️‍🔥 Get 90% accurate colour prediction! And Maintain Fund Upto 7 level
 
 💡 This Prediction Bot will only work when you have Register with bellow links.
 
-BIGDADDY GAMES: 
+𝐁𝐈𝐆𝐃𝐀𝐃𝐃𝐘 𝐆𝐀𝐌𝐄𝐒:
 https://www.bdggame.in/#/register?invitationCode=654343706843
-                    OR
+             OR
 https://bdc5.com/#/register?invitationCode=616515213799
 
-📑 If you follow with above links, there will be upto 99% chance of right prediction.''',reply_markup=prediction_markup)
+📑 If you follow with above links, there will be upto 99% chance of right prediction.''')
             # await update.message.reply_text('play the games',reply_markup=prediction_markup)
 
     # with open(image_path, 'rb') as image_file:
     #     await context.bot.send_photo(chat_id=chat_id, photo=image_file)
-
+            await context.bot.send_message(chat_id=chat_id,  text='𝙃𝙖𝙫𝙚 𝙔𝙤𝙪 𝘾𝙤𝙢𝙥𝙡𝙚𝙩𝙚𝙙 𝙏𝙝𝙚 𝙍𝙚𝙜𝙞𝙨𝙩𝙧𝙖𝙩𝙞𝙤𝙣?',reply_markup=registered_markup)
 
 
 async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
+    chat_id = update.effective_chat.id if update.effective_chat else update.callback_query.message.chat_id
+    user_id = update.effective_user.id
     await query.answer()
     # Check if the "inactive" button was clicked
     if query.data == "inactive":
@@ -74,6 +80,14 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         # await query.answer(text="This button is inactive.", show_alert=True)
         # chat_id = update.message.chat_id
         await start(update, context)
+    
+    if query.data == "𝙔𝙚𝙨":
+        prediction_button = [[KeyboardButton(text="🎰Colour Prediction")]]
+        prediction_markup = ReplyKeyboardMarkup(prediction_button,resize_keyboard=True,one_time_keyboard=True)
+        
+        
+        await context.bot.send_message(chat_id=chat_id, text='💻 Select game for prediction:',reply_markup=prediction_markup)
+
 
 async def choose(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     chat_id = update.effective_chat.id if update.effective_chat else update.callback_query.message.chat_id
@@ -81,8 +95,7 @@ async def choose(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     chat_member = await context.bot.get_chat_member(CHANNEL_USERNAME, user_id)
     if not (chat_member.status in ['left', 'kicked']):
         print("yea");
-        tiranga = [KeyboardButton(text="⚀ BIGDADDY GAMES")]
-        
+        tiranga = [KeyboardButton(text="⚀ 𝐁𝐈𝐆𝐃𝐀𝐃𝐃𝐘 𝐆𝐀𝐌𝐄𝐒")]
         choose_markup = ReplyKeyboardMarkup([tiranga],resize_keyboard=True,one_time_keyboard=True)
         await context.bot.send_message(chat_id=chat_id, text="choose",reply_markup=choose_markup)
     else:
@@ -122,7 +135,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     elif text == "fuck you":
         await update.message.reply_text("no, fuck you")
     
-    elif text == "⚀ BIGDADDY GAMES" or text == "⚡ Next Prediction ⚡":
+    elif text == "⚀ 𝐁𝐈𝐆𝐃𝐀𝐃𝐃𝐘 𝐆𝐀𝐌𝐄𝐒" or text == "⚡ Next Prediction ⚡":
 
         await update.message.reply_text("🎮 Enter Period last 3 digits.",reply_markup=ReplyKeyboardRemove())
         text = update.message.text
@@ -137,7 +150,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         next_markup = ReplyKeyboardMarkup([next_prediction,back_press],resize_keyboard=True,one_time_keyboard=True)
 
 
-        pred = f"✅Prediction Result:\n👨‍💻Period No: {text}\n⚡Result: {result} \n\n Powered by 😈 : SUNIL YOGI "
+        pred = f"✅Prediction Result:\n👨‍💻Period No: {text}\n⚡Result: {result} \n\n Powered by 😈 : 𝐒𝐔𝐍𝐈𝐋 𝐘𝐎𝐆𝐈"
 
         can_show = False
 
@@ -164,4 +177,5 @@ application.add_handler(CallbackQueryHandler(button_callback))
 application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND,handle_message))
 
 application.run_polling()
+
             
